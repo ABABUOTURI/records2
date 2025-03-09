@@ -1,0 +1,93 @@
+/* src/styles/globals.css */
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles */
+body {
+  @apply bg-gray-50 text-gray-800 font-sans;
+}
+
+/* Sidebar */
+.sidebar {
+  @apply w-20 bg-white h-screen fixed top-0 left-0 flex flex-col items-center pt-8 border-r border-gray-200;
+}
+
+.sidebar-icon {
+  @apply w-10 h-10 flex items-center justify-center text-green-500 hover:bg-gray-100 rounded-lg cursor-pointer transition;
+}
+
+/* Header */
+.header {
+  @apply flex justify-between items-center px-8 py-4 bg-white shadow-md;
+}
+
+/* Buttons */
+.btn-primary {
+  @apply bg-green-500 text-white font-semibold py-2 px-6 rounded-lg hover:bg-green-600 transition-all;
+}
+
+/* Table */
+.table-container {
+  @apply bg-white p-6 rounded-lg shadow-md;
+}
+
+.table {
+  @apply w-full border-collapse;
+}
+
+.table th, .table td {
+  @apply px-4 py-3 border-b;
+}
+
+.table th {
+  @apply text-left text-gray-600 font-semibold;
+}
+
+/* Profile & Icons */
+.profile-icon {
+  @apply w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center cursor-pointer;
+}
+
+.delete-icon {
+  @apply text-gray-400 hover:text-red-500 transition cursor-pointer;
+}
+
+.icon {
+  @apply absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500;
+}
+
+/* ===== FORM STYLES ===== */
+
+/* Centering Wrapper */
+.form-wrapper {
+  @apply flex items-center justify-center min-h-screen bg-gray-100 px-4;
+}
+
+/* Form Container */
+.form-container {
+  @apply bg-white shadow-lg rounded-lg p-10 flex flex-col items-center w-full max-w-md;
+}
+
+/* Input Fields */
+.input-field {
+  @apply w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-2;
+}
+
+/* Input Field Wrapper */
+.input-group {
+  @apply relative w-full;
+}
+
+/* Terms and Policy */
+.terms-text {
+  @apply text-xs text-gray-500 mt-4 text-center;
+}
+
+/* Responsive Signup Container */
+@media (min-width: 768px) {
+  .signup-container {
+    @apply flex max-w-4xl w-full bg-white shadow-lg rounded-lg overflow-hidden;
+  }
+}
