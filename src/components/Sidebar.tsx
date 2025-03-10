@@ -1,6 +1,6 @@
 import React from "react";
 import { FaUsers, FaTh, FaWallet, FaSignOutAlt } from "react-icons/fa";
-import { signOut } from "next-auth/react"; // Import signOut function
+import { signOut } from "next-auth/react"; // Import signOut
 
 const Sidebar = () => {
   return (
@@ -14,9 +14,10 @@ const Sidebar = () => {
       <div className="sidebar-icon">
         <FaWallet size={24} />
       </div>
-      {/* Logout Icon */}
-      <div className="sidebar-icon cursor-pointer text-red-500 hover:text-red-700" 
-      // onClick={() => signOut()}
+      {/* Logout Button */}
+      <div
+        className="sidebar-icon cursor-pointer text-red-500"
+        onClick={() => signOut({ callbackUrl: "/SigninPage" })} // Redirect after logout
       >
         <FaSignOutAlt size={24} />
       </div>
