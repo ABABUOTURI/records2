@@ -29,10 +29,12 @@ body {
 }
 
 /* Table */
-.table-container {
-  @apply bg-white p-4 rounded-lg shadow-md my-4;
+.table-containers {
+  @apply  p-4 rounded-lg shadow-md my-4 mx-22;
 }
-
+.table-container {
+  @apply bg-white p-4 rounded-lg shadow-md my-4 mx-4;
+}
 
 .table {
   @apply w-full border-collapse;

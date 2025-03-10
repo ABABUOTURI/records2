@@ -4,6 +4,9 @@ import React from "react";
 import { FaTrash, FaSearch,  FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import "@/styles/globals.css";
 import { useRouter } from "next/navigation";
+import { useSession, signIn } from "next-auth/react";
+import Sidebar from "@/components/Sidebar";
+import Header from "@/components/Header";
 
 const employees = [
   { firstName: "Joshua", lastName: "Bakare", email: "josh.bakery@gmail.com", phone: "+2348012345678", role: "Admin" },
@@ -16,7 +19,20 @@ const employees = [
 
 const Employee = () => {
   const router = useRouter();
+  const { data: session, status } = useSession();
+
+  if (status === "loading") return <p>Loading...</p>;
+  if (!session) return <button onClick={() => signIn()}>Sign in</button>;
+  
+
   return (
+    <div className="flex">
+    {/* Sidebar */}
+    <Sidebar />
+
+    <div className="flex-1">
+      {/* Header */}
+      <Header />
     <div className="table-containers ml-16">
       <div className="flex justify-between items-center px-6">
           {/* Left Side - Title */}
@@ -107,6 +123,8 @@ const Employee = () => {
           ))}
         </tbody>
       </table>
+    </div>
+    </div>
     </div>
   );
 };

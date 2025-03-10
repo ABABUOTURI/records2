@@ -3,13 +3,19 @@
 import React, { useState, useEffect } from "react";
 import { FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/globals.css"; // Import global styles
-import { useRouter } from "next/navigation";
+//import { useRouter } from "next/navigation";
+ import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
 
 const SigninPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const [error, setError] = useState(null);
   const images = ["/assets/A1.jpg", "/assets/A2.jpg", "/assets/A3.jpg", "/assets/A4.jpg"];
   const [currentImage, setCurrentImage] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -17,6 +23,25 @@ const SigninPage = () => {
     }, 5000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleSignIn = async () => {
+    setLoading(true);
+  
+    const result = await signIn("credentials", {
+      redirect: false, // Prevents default redirect
+      email, // Use entered email
+      password, // Use entered password
+    });
+  
+    if (result?.ok) {
+      router.push("/Employee"); // Navigate to Employee page on success
+    } else {
+      alert("Sign-in failed! Invalid credentials.");
+    }
+  
+    setLoading(false);
+  };
+  
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
@@ -39,11 +64,13 @@ const SigninPage = () => {
             <div className="relative">
               <label className="text-gray-600">Email</label>
               <div className="relative">
-                <input
-                  type="email"
-                  placeholder="joshbakery@gmail.com"
-                  className="input-field pl-10"
-                />
+              <input
+                type="email"
+                placeholder="joshbakery@gmail.com"
+                className="input-field pl-10"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)} // Capture input value
+              />
                 <FaEnvelope className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg" />
               </div>
             </div>
@@ -52,11 +79,13 @@ const SigninPage = () => {
             <div className="mt-4 relative">
               <label className="text-gray-600">Password</label>
               <div className="relative">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="**********"
-                  className="input-field pl-10 pr-10"
-                />
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="**********"
+                className="input-field pl-10 pr-10"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)} // Capture input value
+              />
                 <FaEyeSlash
                   className={`absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg cursor-pointer ${
                     showPassword ? "hidden" : "block"
@@ -73,7 +102,9 @@ const SigninPage = () => {
             </div>
 
             {/* Sign In Button */}
-            <button className="btn-primary w-full mt-6">Sign In</button>
+            <button className="btn-primary w-full mt-6" onClick={handleSignIn} disabled={loading}>
+              {loading ? "Signing In..." : "Sign In"}
+            </button>
 
             {/* Terms and Policy */}
             <p className="text-xs text-gray-500 mt-4 text-center">
