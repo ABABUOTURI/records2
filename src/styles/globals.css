@@ -30,8 +30,9 @@ body {
 
 /* Table */
 .table-container {
-  @apply bg-white p-6 rounded-lg shadow-md;
+  @apply bg-white p-4 rounded-lg shadow-md my-4;
 }
+
 
 .table {
   @apply w-full border-collapse;

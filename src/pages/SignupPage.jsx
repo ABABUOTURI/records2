@@ -5,10 +5,11 @@ import { FaUser, FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/globals.css"; // Import global styles
 import Image from "next/image";
 import {  useEffect } from "react";
+import { useRouter } from "next/router";
 
 const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-
+  const router = useRouter();
   const images = ["/assets/A1.jpg", "/assets/A2.jpg", "/assets/A3.jpg", "/assets/A4.jpg"];
 
   const [currentImage, setCurrentImage] = useState(0);
@@ -42,9 +43,18 @@ const SignupPage = () => {
         {/* Right Section - Form */}
         <div className="w-full md:w-1/2 p-10 flex flex-col justify-center">
           <h2 className="text-2xl font-bold text-gray-800">Create your free account</h2>
-          <p className="text-gray-500 text-sm mt-1">
+          {/* <p className="text-gray-500 text-sm mt-1">
             Already registered? <a href="#" className="text-green-500">Sign in</a>
-          </p>
+          </p> */}
+           <p className="text-gray-500 text-sm mt-1">
+           Already registered?{" "}
+      <a
+        onClick={() => router.push("/SigninPage")}
+        className="text-green-500 cursor-pointer"
+      >
+        Create an account
+      </a>
+    </p>
 
           <div className="mt-6">
             {/* First Name & Last Name */}
